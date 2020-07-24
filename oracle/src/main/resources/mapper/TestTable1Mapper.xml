@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.us.example.dao.UserDao">
+	<resultMap id="testTable1Map"
+		type="com.example.test.pojo.TestTable1DTO">
+		<id property="idTestTable1"  column="ID_TEST_TABLE_1" />
+		<result property="testColumn1"  column="TEST_COLUMN_1" />
+		<result property="testColumn2"  column="TEST_COLUMN_2" />
+		<result property="testColumn3"  column="TEST_COLUMN_3" />
+		<result property="testColumn4"  column="TEST_COLUMN_4" />
+		<result property="testColumn5"  column="TEST_COLUMN_5" />
+		<result property="testColumn6"  column="TEST_COLUMN_6" />
+		<result property="testColumn7"  column="TEST_COLUMN_7" />
+		<result property="testColumn8"  column="TEST_COLUMN_8" />
+		<result property="testColumn9"  column="TEST_COLUMN_9" />
+		<result property="testColumn10"  column="TEST_COLUMN_10" />
+	</resultMap>
+
+	<insert id="saveTestTable1"  parameterType="com.example.test.pojo.TestTable1DTO">
+		insert into TEST_TABLE_1(
+			ID_TEST_TABLE_1,
+			TEST_COLUMN_1,
+			TEST_COLUMN_2,
+			TEST_COLUMN_3,
+			TEST_COLUMN_4,
+			TEST_COLUMN_5,
+			TEST_COLUMN_6,
+			TEST_COLUMN_7,
+			TEST_COLUMN_8,
+			TEST_COLUMN_9
+			TEST_COLUMN_10)
+			values (
+				sys_guid(),
+				#{idTestTable1, jdbcType=VARCHAR},
+				#{testColumn1, jdbcType=VARCHAR},
+				#{testColumn2, jdbcType=VARCHAR},
+				#{testColumn3, jdbcType=VARCHAR},
+				#{testColumn4, jdbcType=VARCHAR},
+				#{testColumn5, jdbcType=VARCHAR},
+				#{testColumn6, jdbcType=VARCHAR},
+				#{testColumn7, jdbcType=VARCHAR},
+				#{testColumn8, jdbcType=VARCHAR},
+				#{testColumn9, jdbcType=VARCHAR},
+				#{testColumn10, jdbcType=VARCHAR}
+			)
+	</insert>
+
+</mapper>
