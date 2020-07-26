@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.mapper.TestTable1Mapper;
-import com.example.test.pojo.TestTable1DTO;
 
 @Service
 public class TestTable1Service {
@@ -13,9 +12,8 @@ public class TestTable1Service {
 	@Autowired
 	private TestTable1Mapper testTable1Mapper;
 	
-	
 	@Transactional
-	public void saveTestTable1(TestTable1DTO testTable1DTO) {
-		testTable1Mapper.saveTestTable1(testTable1DTO);
+	public void saveTestTable1(/** List<TestTable1DTO> testTable1DTO */) {
+		testTable1Mapper.saveTestTable1();
 	}
 }

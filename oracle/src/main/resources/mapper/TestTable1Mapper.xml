@@ -1,48 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.us.example.dao.UserDao">
+<mapper namespace="com.example.test.mapper.TestTable1Mapper">
 	<resultMap id="testTable1Map"
 		type="com.example.test.pojo.TestTable1DTO">
-		<id property="idTestTable1"  column="ID_TEST_TABLE_1" />
-		<result property="testColumn1"  column="TEST_COLUMN_1" />
-		<result property="testColumn2"  column="TEST_COLUMN_2" />
-		<result property="testColumn3"  column="TEST_COLUMN_3" />
-		<result property="testColumn4"  column="TEST_COLUMN_4" />
-		<result property="testColumn5"  column="TEST_COLUMN_5" />
-		<result property="testColumn6"  column="TEST_COLUMN_6" />
-		<result property="testColumn7"  column="TEST_COLUMN_7" />
-		<result property="testColumn8"  column="TEST_COLUMN_8" />
-		<result property="testColumn9"  column="TEST_COLUMN_9" />
-		<result property="testColumn10"  column="TEST_COLUMN_10" />
+		<id property="idTestTable1" column="ID_TEST_TABLE_1" />
+		<result property="testColumn1" column="TEST_COLUMN_1" />
+		<result property="testColumn2" column="TEST_COLUMN_2" />
+		<result property="testColumn3" column="TEST_COLUMN_3" />
+		<result property="testColumn4" column="TEST_COLUMN_4" />
+		<result property="testColumn5" column="TEST_COLUMN_5" />
+		<result property="testColumn6" column="TEST_COLUMN_6" />
+		<result property="testColumn7" column="TEST_COLUMN_7" />
+		<result property="testColumn8" column="TEST_COLUMN_8" />
+		<result property="testColumn9" column="TEST_COLUMN_9" />
+		<result property="testColumn10" column="TEST_COLUMN_10" />
 	</resultMap>
+	<!-- <insert id="saveTestTable1" parameterType="java.util.List"> insert 
+		into TEST_TABLE_1( ID_TEST_TABLE_1, TEST_COLUMN_1, TEST_COLUMN_2, TEST_COLUMN_3, 
+		TEST_COLUMN_4, TEST_COLUMN_5, TEST_COLUMN_6, TEST_COLUMN_7, TEST_COLUMN_8, 
+		TEST_COLUMN_9, TEST_COLUMN_10) <foreach collection ="list" item="item" separator 
+		="union all"> select sys_guid(), #{item.testColumn1, jdbcType=VARCHAR}, #{item.testColumn2, 
+		jdbcType=VARCHAR}, #{item.testColumn3, jdbcType=VARCHAR}, #{item.testColumn4, 
+		jdbcType=VARCHAR}, #{item.testColumn5, jdbcType=VARCHAR}, #{item.testColumn6, 
+		jdbcType=VARCHAR}, #{item.testColumn7, jdbcType=VARCHAR}, #{item.testColumn8, 
+		jdbcType=VARCHAR}, #{item.testColumn9, jdbcType=VARCHAR}, #{item.testColumn10, 
+		jdbcType=VARCHAR} from dual </foreach > </insert> -->
 
-	<insert id="saveTestTable1"  parameterType="com.example.test.pojo.TestTable1DTO">
-		insert into TEST_TABLE_1(
-			ID_TEST_TABLE_1,
-			TEST_COLUMN_1,
-			TEST_COLUMN_2,
-			TEST_COLUMN_3,
-			TEST_COLUMN_4,
-			TEST_COLUMN_5,
-			TEST_COLUMN_6,
-			TEST_COLUMN_7,
-			TEST_COLUMN_8,
-			TEST_COLUMN_9
-			TEST_COLUMN_10)
-			values (
-				sys_guid(),
-				#{idTestTable1, jdbcType=VARCHAR},
-				#{testColumn1, jdbcType=VARCHAR},
-				#{testColumn2, jdbcType=VARCHAR},
-				#{testColumn3, jdbcType=VARCHAR},
-				#{testColumn4, jdbcType=VARCHAR},
-				#{testColumn5, jdbcType=VARCHAR},
-				#{testColumn6, jdbcType=VARCHAR},
-				#{testColumn7, jdbcType=VARCHAR},
-				#{testColumn8, jdbcType=VARCHAR},
-				#{testColumn9, jdbcType=VARCHAR},
-				#{testColumn10, jdbcType=VARCHAR}
-			)
+
+	<insert id="saveTestTable1">
+	 	<![CDATA[
+	 	
+		begin
+		
+		delete from t_sequence_num;
+		
+		for i in 0..9999 loop
+		insert into t_sequence_num(sequenceNum) values(i);
+		end loop;
+		
+		 
+		for i in 1..10000 loop
+		
+		insert into TEST_TABLE_1
+		
+		(
+		ID_TEST_TABLE_1,
+		TEST_COLUMN_1,
+		TEST_COLUMN_2,
+		TEST_COLUMN_3,
+		TEST_COLUMN_4,
+		TEST_COLUMN_5,
+		TEST_COLUMN_6,
+		TEST_COLUMN_7,
+		TEST_COLUMN_8,
+		TEST_COLUMN_9,
+		TEST_COLUMN_10
+		)
+		
+		select
+		lpad(i * 10000 + t_sequence_num.sequencenum, 32, 0) as MSISDN,
+		'testColumn1' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum ),
+		'testColumn2' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum ),
+		'testColumn3' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum ),
+		'testColumn4' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum ),
+		'testColumn5' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum ),
+		'testColumn6' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum ),
+		'testColumn7' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum ),
+		'testColumn8' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum ),
+		'testColumn9' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum ),
+		'testColumn10' || '_' || to_char( i * 10000 + t_sequence_num.sequencenum )
+		
+		from t_sequence_num;
+		
+		commit;
+		
+		end loop;
+		
+		end;
+		]]>
 	</insert>
 
 </mapper>

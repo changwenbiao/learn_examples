@@ -13,6 +13,7 @@ public class TestTable1DTO {
 	private String testColumn8;
 	private String testColumn9;
 	private String testColumn10;
+	
 	public String getIdTestTable1() {
 		return idTestTable1;
 	}
@@ -79,6 +80,5 @@ public class TestTable1DTO {
 	public void setTestColumn10(String testColumn10) {
 		this.testColumn10 = testColumn10;
 	}
-
 	
 }
