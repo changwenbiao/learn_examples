@@ -24,3 +24,4 @@ oracle/target/classes/mapper/TestTable1Mapper.xml
 oracle/target/classes/META-INF/MANIFEST.MF
 oracle/target/classes/META-INF/maven/com.example.test/oracle/pom.properties
 oracle/target/classes/META-INF/maven/com.example.test/oracle/pom.xml
+oracle/target/classes/com/example/test/controller/TestTable1Controller.class
